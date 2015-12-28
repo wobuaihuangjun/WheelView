@@ -23,7 +23,7 @@ public class SelectTimeDialog extends BaseDialog {
     private WheelView rightWheel;
 
     private int timeType = 0;
-    private OnUpdateTimeListener updateTimeListener;
+    private OnClickListener onClickListener;
 
     boolean cancelable = true;
 
@@ -32,9 +32,9 @@ public class SelectTimeDialog extends BaseDialog {
      *
      * @param mContext
      */
-    public SelectTimeDialog(Context mContext, OnUpdateTimeListener listener) {
+    public SelectTimeDialog(Context mContext, OnClickListener listener) {
         this.context = mContext;
-        updateTimeListener = listener;
+        onClickListener = listener;
         create();
     }
 
@@ -54,7 +54,6 @@ public class SelectTimeDialog extends BaseDialog {
         leftWheel.setWheelStyle(WheelStyle.STYLE_HOUR);
         rightWheel.setWheelStyle(WheelStyle.STYLE_MINUTE);
 
-
         dialog = new AlertDialog.Builder(context).setView(dialogView).create();
 
         dialog.setCancelable(cancelable);
@@ -64,7 +63,13 @@ public class SelectTimeDialog extends BaseDialog {
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                if (onClickListener != null) {
+                    if (!onClickListener.onCancel()) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
+                }
             }
         });
         Button sureBtn = (Button) dialogView.findViewById(R.id.select_time_sure_btn);
@@ -72,10 +77,13 @@ public class SelectTimeDialog extends BaseDialog {
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
-
-                if (updateTimeListener != null) {
-                    updateTimeListener.onUpdateTime(leftWheel.getCurrentItem(), rightWheel.getCurrentItem(), timeType);
+                if (onClickListener != null) {
+                    if (!onClickListener.onSure(leftWheel.getCurrentItem(),
+                            rightWheel.getCurrentItem(), timeType)) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
                 }
 
             }
@@ -120,8 +128,8 @@ public class SelectTimeDialog extends BaseDialog {
      *
      * @param listener
      */
-    public void setOnUpdateTimeListener(OnUpdateTimeListener listener) {
-        updateTimeListener = listener;
+    public void setOnUpdateTimeListener(OnClickListener listener) {
+        onClickListener = listener;
     }
 
     /**
@@ -129,7 +137,9 @@ public class SelectTimeDialog extends BaseDialog {
      *
      * @author huangzj
      */
-    public interface OnUpdateTimeListener {
-        void onUpdateTime(int hour, int minute, int setTimeType);
+    public interface OnClickListener {
+        boolean onSure(int hour, int minute, int setTimeType);
+
+        boolean onCancel();
     }
 }

@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 /**
  * 日期选择对话框
- *
+ * <p/>
  * Created by huangzj on 2015/10/25.
  */
 public class SelectDateDialog extends BaseDialog {
@@ -28,9 +28,7 @@ public class SelectDateDialog extends BaseDialog {
     int selectYear;
     int selectMonth;
 
-    private OnClickListener updateDateListener;
-
-    boolean cyclicable = true;
+    private OnClickListener onClickListener;
 
     /**
      * 创建一个日期选择对话框
@@ -49,7 +47,7 @@ public class SelectDateDialog extends BaseDialog {
      */
     public SelectDateDialog(Context mContext, OnClickListener listener) {
         this.context = mContext;
-        updateDateListener = listener;
+        onClickListener = listener;
         create();
     }
 
@@ -91,9 +89,12 @@ public class SelectDateDialog extends BaseDialog {
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
-                if (updateDateListener != null) {
-                    updateDateListener.onCancel();
+                if (onClickListener != null) {
+                    if (!onClickListener.onCancel()) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
                 }
             }
         });
@@ -102,26 +103,25 @@ public class SelectDateDialog extends BaseDialog {
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
                 int year = yearWheel.getCurrentItem() + 1980;
                 int month = monthWheel.getCurrentItem();
                 int day = dayWheel.getCurrentItem() + 1;
-
                 int daySize = dayWheel.getItemCount();
-
                 if (day > daySize) {
                     day = day - daySize;
                 }
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DATE, day);
+                long setTime = calendar.getTimeInMillis();
 
-                Calendar ca = Calendar.getInstance();
-                ca.set(Calendar.YEAR, year);
-                ca.set(Calendar.MONTH, month);
-                ca.set(Calendar.DATE, day);
-
-                long setTime = ca.getTimeInMillis();
-
-                if (updateDateListener != null) {
-                    updateDateListener.onSure(year, month, day, setTime);
+                if (onClickListener != null) {
+                    if (!onClickListener.onSure(year, month, day, setTime)) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
                 }
             }
         });
@@ -155,7 +155,7 @@ public class SelectDateDialog extends BaseDialog {
      * @param listener
      */
     public void setOnClickListener(OnClickListener listener) {
-        updateDateListener = listener;
+        onClickListener = listener;
     }
 
     /**
@@ -164,8 +164,8 @@ public class SelectDateDialog extends BaseDialog {
      * @author huangzj
      */
     public interface OnClickListener {
-        void onSure(int year, int month, int day, long time);
+        boolean onSure(int year, int month, int day, long time);
 
-        void onCancel();
+        boolean onCancel();
     }
 }

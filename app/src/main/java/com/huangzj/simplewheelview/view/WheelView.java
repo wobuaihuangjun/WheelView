@@ -30,6 +30,7 @@ import java.util.TimerTask;
  * Created by huangzj on 2015/12/25.
  */
 public class WheelView extends View {
+
     public static final String TAG = "WheelView";
 
     /**
@@ -196,7 +197,7 @@ public class WheelView extends View {
         centerLinePaint.setTextAlign(Align.CENTER);
         centerLinePaint.setColor(getResources().getColor(R.color.wheel_unselect_text));
 
-        // 画背景中的两条线
+        // 绘制背景
         setBackground(null);
     }
 

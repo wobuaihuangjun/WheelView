@@ -81,24 +81,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void showSelectWeekDialog() {
         SelectWeekDialog mSelectWeekDialog = new SelectWeekDialog(this, new SelectWeekDialog.OnClickListener() {
             @Override
-            public void onSure(int item, int setTimeType) {
+            public boolean onSure(int item, int setTimeType) {
                 Toast.makeText(MainActivity.this, weekString[item], Toast.LENGTH_LONG).show();
+                return false;
             }
 
             @Override
-            public void onCancel() {
-
+            public boolean onCancel() {
+                return false;
             }
         });
         mSelectWeekDialog.show(3);
     }
 
     private void showSelectTimeDialog() {
-        SelectTimeDialog mSelectTimeDialog = new SelectTimeDialog(this, new SelectTimeDialog.OnUpdateTimeListener() {
+        SelectTimeDialog mSelectTimeDialog = new SelectTimeDialog(this, new SelectTimeDialog.OnClickListener() {
             @Override
-            public void onUpdateTime(int hour, int minute, int setTimeType) {
+            public boolean onSure(int hour, int minute, int setTimeType) {
                 String result = String.format("%02d:%02d", hour, minute);
                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            @Override
+            public boolean onCancel() {
+                return false;
             }
         });
         mSelectTimeDialog.show(12, 30, 1);
@@ -108,13 +115,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SelectDateDialog mSelectDateDialog = new SelectDateDialog(this);
         mSelectDateDialog.setOnClickListener(new SelectDateDialog.OnClickListener() {
             @Override
-            public void onSure(int mYear, int mMonth, int mDay, long time) {
+            public boolean onSure(int mYear, int mMonth, int mDay, long time) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Toast.makeText(MainActivity.this, dateFormat.format(time), Toast.LENGTH_LONG).show();
+                return false;
             }
 
             @Override
-            public void onCancel() {
+            public boolean onCancel() {
+                return false;
             }
         });
         mSelectDateDialog.show(2013, 11, 15);

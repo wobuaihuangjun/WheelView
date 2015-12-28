@@ -22,7 +22,7 @@ public class SelectWeekDialog extends BaseDialog {
     private WheelView wheel;
 
     private int timeType = 0;
-    private OnClickListener itemSelecetListener;
+    private OnClickListener onClickListener;
 
     boolean cancelable = true;
 
@@ -33,7 +33,7 @@ public class SelectWeekDialog extends BaseDialog {
      */
     public SelectWeekDialog(Context mContext, OnClickListener listener) {
         this.context = mContext;
-        itemSelecetListener = listener;
+        onClickListener = listener;
         create();
     }
 
@@ -60,9 +60,12 @@ public class SelectWeekDialog extends BaseDialog {
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
-                if (itemSelecetListener != null) {
-                    itemSelecetListener.onCancel();
+                if (onClickListener != null) {
+                    if (!onClickListener.onCancel()) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
                 }
             }
         });
@@ -72,10 +75,13 @@ public class SelectWeekDialog extends BaseDialog {
             @Override
             public void onClick(View v) {
                 int index = wheel.getCurrentItem();
-                dialog.dismiss();
 
-                if (itemSelecetListener != null) {
-                    itemSelecetListener.onSure(index, timeType);
+                if (onClickListener != null) {
+                    if (onClickListener.onSure(index, timeType)) {
+                        dialog.dismiss();
+                    }
+                } else {
+                    dialog.dismiss();
                 }
             }
         });
@@ -124,7 +130,7 @@ public class SelectWeekDialog extends BaseDialog {
      * @param listener
      */
     public void setOnClickListener(OnClickListener listener) {
-        itemSelecetListener = listener;
+        onClickListener = listener;
     }
 
     /**
@@ -133,8 +139,8 @@ public class SelectWeekDialog extends BaseDialog {
      * @author huangzj
      */
     public interface OnClickListener {
-        void onSure(int item, int setTimeType);
+        boolean onSure(int item, int setTimeType);
 
-        void onCancel();
+        boolean onCancel();
     }
 }
