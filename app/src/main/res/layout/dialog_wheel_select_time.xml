@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_normal_style"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/select_time_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1">
+
+            <com.huangzj.simplewheelview.view.WheelView
+                android:id="@+id/select_time_wheel_left"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="40dp"
+                android:paddingTop="4dp"
+                android:text="@string/hour"
+                android:textColor="@color/orange"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1">
+
+            <com.huangzj.simplewheelview.view.WheelView
+                android:id="@+id/select_time_wheel_right"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="40dp"
+                android:paddingTop="4dp"
+                android:text="@string/minute"
+                android:textColor="@color/orange"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/select_time_layout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/select_time_cancel_btn"
+            style="@style/dialog_left_btn_style" />
+
+        <View
+            style="@style/dialog_cutting_line_style" />
+
+        <Button
+            android:id="@+id/select_time_sure_btn"
+            style="@style/dialog_right_btn_style" />
+    </LinearLayout>
+
+</RelativeLayout>

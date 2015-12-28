@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog_normal_style"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/date_select_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <com.huangzj.simplewheelview.view.WheelView
+            android:id="@+id/select_date_wheel_year_wheel"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1" />
+
+        <com.huangzj.simplewheelview.view.WheelView
+            android:id="@+id/select_date_month_wheel"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1" />
+
+        <com.huangzj.simplewheelview.view.WheelView
+            android:id="@+id/select_date_day_wheel"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/cutting_line"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/cutting_line"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_select_layout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/select_date_cancel"
+            style="@style/dialog_left_btn_style" />
+
+        <View style="@style/dialog_cutting_line_style" />
+
+        <Button
+            android:id="@+id/select_date_sure"
+            style="@style/dialog_right_btn_style" />
+    </LinearLayout>
+
+</RelativeLayout>
