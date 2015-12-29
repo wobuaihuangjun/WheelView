@@ -70,7 +70,7 @@ public class SelectDateDialog extends BaseDialog {
         yearWheel.setOnSelectListener(new WheelView.onSelectListener() {
             @Override
             public void onSelect(int index, String text) {
-                selectYear = index + 1980;
+                selectYear = index + WheelStyle.minYear;
                 dayWheel.setWheelItemList(WheelStyle.createDayString(selectYear, selectMonth));
             }
         });
@@ -103,7 +103,7 @@ public class SelectDateDialog extends BaseDialog {
 
             @Override
             public void onClick(View v) {
-                int year = yearWheel.getCurrentItem() + 1980;
+                int year = yearWheel.getCurrentItem() + WheelStyle.minYear;
                 int month = monthWheel.getCurrentItem();
                 int day = dayWheel.getCurrentItem() + 1;
                 int daySize = dayWheel.getItemCount();
@@ -141,8 +141,8 @@ public class SelectDateDialog extends BaseDialog {
         if (dialog == null || dialog.isShowing()) {
             return;
         }
-        dayWheel.setWheelItemList(WheelStyle.createDayString(year - 1980, month + 1));
-        yearWheel.setCurrentItem(year - 1980);
+        dayWheel.setWheelItemList(WheelStyle.createDayString(year - WheelStyle.minYear, month + 1));
+        yearWheel.setCurrentItem(year - WheelStyle.minYear);
         monthWheel.setCurrentItem(month);
         dayWheel.setCurrentItem(day - 1);
         dialog.show();

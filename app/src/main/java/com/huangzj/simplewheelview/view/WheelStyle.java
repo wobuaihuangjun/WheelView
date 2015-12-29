@@ -74,9 +74,12 @@ public class WheelStyle {
         return wheelString;
     }
 
+    public static final int minYear = 1980;
+    public static final int maxYear = 2020;
+
     private static List<String> createYearString() {
         List<String> wheelString = new ArrayList<>();
-        for (int i = 1980; i < 2020; i++) {
+        for (int i = minYear; i <= maxYear; i++) {
             wheelString.add("" + i);
         }
         return wheelString;
