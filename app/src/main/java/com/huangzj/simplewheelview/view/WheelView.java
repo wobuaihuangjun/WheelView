@@ -132,15 +132,22 @@ public class WheelView extends View {
         if (itemList != null) {
             itemCount = itemList.size();
             resetCurrentSelect();
-            invalidate();
         } else {
             Log.i(TAG, "item is null");
         }
     }
 
     private void resetCurrentSelect() {
+        if (currentItem < 0) {
+            currentItem = 0;
+        }
         while (currentItem >= itemCount) {
             currentItem--;
+        }
+        if (currentItem >= 0 && currentItem < itemCount) {
+            invalidate();
+        } else {
+            Log.i(TAG, "current item is invalid");
         }
     }
 
@@ -154,7 +161,6 @@ public class WheelView extends View {
     public void setCurrentItem(int selected) {
         currentItem = selected;
         resetCurrentSelect();
-        invalidate();
     }
 
     public int getCurrentItem() {
