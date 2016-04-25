@@ -9,6 +9,7 @@ import android.content.Context;
  */
 public class SizeConvertUtil {
 
+    private SizeConvertUtil() {}
 
     public static int dpTopx(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
