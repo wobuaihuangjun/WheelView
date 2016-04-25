@@ -17,27 +17,27 @@ public class WheelStyle {
     /**
      * Wheel Style Hour
      */
-    public static int STYLE_HOUR = 1;
+    public static final int STYLE_HOUR = 1;
     /**
      * Wheel Style Minute
      */
-    public static int STYLE_MINUTE = 2;
+    public static final int STYLE_MINUTE = 2;
     /**
      * Wheel Style Year
      */
-    public static int STYLE_YEAR = 3;
+    public static final int STYLE_YEAR = 3;
     /**
      * Wheel Style Month
      */
-    public static int STYLE_MONTH = 4;
+    public static final int STYLE_MONTH = 4;
     /**
      * Wheel Style Day
      */
-    public static int STYLE_DAY = 5;
+    public static final int STYLE_DAY = 5;
     /**
      * Wheel Style Light Time
      */
-    public static int STYLE_LIGHT_TIME = 7;
+    public static final int STYLE_LIGHT_TIME = 7;
 
     public static List<String> getItemList(Context context, int Style) {
         if (Style == STYLE_HOUR) {
