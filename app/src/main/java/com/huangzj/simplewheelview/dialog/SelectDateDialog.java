@@ -67,7 +67,7 @@ public class SelectDateDialog extends BaseDialog {
         dayWheel = (WheelView) dialogView.findViewById(R.id.select_date_day_wheel);
 
         yearWheel.setWheelStyle(WheelStyle.STYLE_YEAR);
-        yearWheel.setOnSelectListener(new WheelView.onSelectListener() {
+        yearWheel.setOnSelectListener(new WheelView.SelectListener() {
             @Override
             public void onSelect(int index, String text) {
                 selectYear = index + WheelStyle.minYear;
@@ -76,7 +76,7 @@ public class SelectDateDialog extends BaseDialog {
         });
 
         monthWheel.setWheelStyle(WheelStyle.STYLE_MONTH);
-        monthWheel.setOnSelectListener(new WheelView.onSelectListener() {
+        monthWheel.setOnSelectListener(new WheelView.SelectListener() {
             @Override
             public void onSelect(int index, String text) {
                 selectMonth = index + 1;

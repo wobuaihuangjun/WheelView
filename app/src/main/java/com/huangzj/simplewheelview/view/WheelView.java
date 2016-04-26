@@ -72,7 +72,7 @@ public class WheelView extends View {
      */
     private float mMoveLen = 0;
     private boolean isInit = false;
-    private onSelectListener mSelectListener;
+    private SelectListener mSelectListener;
     private Timer timer;
     private MyTimerTask mTask;
 
@@ -112,7 +112,7 @@ public class WheelView extends View {
         init(context);
     }
 
-    public void setOnSelectListener(onSelectListener listener) {
+    public void setOnSelectListener(SelectListener listener) {
         mSelectListener = listener;
     }
 
@@ -388,7 +388,7 @@ public class WheelView extends View {
         }
     }
 
-    public interface onSelectListener {
+    public interface SelectListener {
         void onSelect(int index, String text);
     }
 

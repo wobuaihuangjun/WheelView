@@ -14,6 +14,9 @@ import java.util.List;
  */
 public class WheelStyle {
 
+    public static final int minYear = 1980;
+    public static final int maxYear = 2020;
+
     /**
      * Wheel Style Hour
      */
@@ -39,6 +42,8 @@ public class WheelStyle {
      */
     public static int STYLE_LIGHT_TIME = 7;
 
+    private WheelStyle() {}
+
     public static List<String> getItemList(Context context, int Style) {
         if (Style == STYLE_HOUR) {
             return createHourString();
@@ -53,9 +58,8 @@ public class WheelStyle {
         } else if (Style == STYLE_LIGHT_TIME) {
             return createWeekString(context);
         } else {
-            new IllegalArgumentException("style is illegal");
+            throw new IllegalArgumentException("style is illegal");
         }
-        return null;
     }
 
     private static List<String> createHourString() {
@@ -74,13 +78,10 @@ public class WheelStyle {
         return wheelString;
     }
 
-    public static final int minYear = 1980;
-    public static final int maxYear = 2020;
-
     private static List<String> createYearString() {
         List<String> wheelString = new ArrayList<>();
         for (int i = minYear; i <= maxYear; i++) {
-            wheelString.add("" + i);
+            wheelString.add(Integer.toString(i));
         }
         return wheelString;
     }
